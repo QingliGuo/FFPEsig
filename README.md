@@ -6,4 +6,5 @@ To run FFPEsig:
 + 3. Command line: python FFPEsig.py <path-to-sample-file> <sample-ID> <repaired/unrepaired>
 
 # Anlysis code
-+ Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
+__Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
++ FFPE_sig_discovery[https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html]
