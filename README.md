@@ -7,4 +7,4 @@ To run FFPEsig:
 
 # Anlysis code
 __Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
-+ FFPE_sig_discovery[https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html]
++ 1. [FFPE_sig_discovery](https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html)
