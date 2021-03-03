@@ -3,11 +3,12 @@
 To run FFPEsig:
 + Download [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
 + Install [python 3](https://www.python.org/downloads/) and the packages required in [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
-+ Command line: 
-\begin{code}## Heading ##
-$python FFPEsig.py <path-to-sample-file> <sample-ID> <"repaired"/"unrepaired">
-\end{code}
-
++ Run the command line:
+```
+python FFPEsig.py <path-to-sample-file> <sample-ID> <"repaired"/"unrepaired">
+}
+```
+  
 # Anlysis code
 Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
 + [FFPE signatures discovery](https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html)
