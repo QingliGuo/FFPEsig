@@ -7,5 +7,6 @@ To run FFPEsig:
 
 # Anlysis code
 Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
-+ 1. [FFPE_sig_discovery](https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html)
++ [FFPE_sig_discovery](https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html)
++
 + [WGS CRC FFPEs](https://qingliguo.github.io/FFPEsig/Correcting_FFPEnoise_in_localSequencedWGSdata.html)
