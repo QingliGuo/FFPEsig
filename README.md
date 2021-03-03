@@ -1,5 +1,7 @@
 # FFPEsig
 
+FFPEsig uses FFPE signature as a noise profile to correct the observed mutation counts from a given FFPE WGS sample.
+
 1. To run FFPEsig:
 + Download [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
 + Install [python 3](https://www.python.org/downloads/) and the packages required in [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
