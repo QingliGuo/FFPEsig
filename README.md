@@ -1,12 +1,15 @@
 # FFPEsig
 
-To run FFPEsig:
+1. To run FFPEsig:
 + Download [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
 + Install [python 3](https://www.python.org/downloads/) and the packages required in [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
 + Run the command line:
 ```
-python FFPEsig.py <path-to-sample-file> <sample-ID> <"repaired"/"unrepaired">
-}
+python FFPEsig.py <path-to-sample-file> <sample-ID> <Repaired/Unrepaired>
+```
+2. Example
+```
+python FFPEsig.py ./Data/simulated_PCAWG_FFPE_unrepaired.csv ColoRect-AdenoCA::SP21528 Unrepaired
 ```
   
 # Anlysis code
