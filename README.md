@@ -20,7 +20,7 @@ python FFPEsig.py -i ./Data/simulated_PCAWG_FFPE_unrepaired.csv -s ColoRect-Aden
 ```
 
 **Note**
-+ Input file, [--input|-i], must be a standard CSV format dataframe which contains columns specifying sample IDs;
++ Input file, [--input|-i], must be a standard CSV format dataframe which column names are the sample IDs;
 + Sample ID, [--sample|-s], must be one of the sample IDs in Input file [--input|-i];
 + Label option, [--label|-l], must be either of them <Unrepaired|Repaired>.
 
