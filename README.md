@@ -4,16 +4,26 @@ FFPEsig uses FFPE signature as a noise profile to correct the observed mutation 
 
 1. To run FFPEsig:
 + Download [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
-+ Install [python 3](https://www.python.org/downloads/) and the packages required in [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
++ Install [python 3](https://www.python.org/downloads/) and the packages required in [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py), including pandas, numpy, matplotlib, seaborn.
 + Run the command line:
 ```
-python FFPEsig.py <path-to-sample-file> <sample-ID> <Repaired/Unrepaired>
+python FFPEsig.py [--input|-i] <Path-to-the-DataFrame> [--sample|-s] <Sample_id> [--label|-l] <Unrepaired|Repaired> [--output_dir|-o] <Path-of-output-folder>
 ```
 2. Example
 ```
-python FFPEsig.py ./Data/simulated_PCAWG_FFPE_unrepaired.csv ColoRect-AdenoCA::SP21528 Unrepaired
+python FFPEsig.py --input ./Data/simulated_PCAWG_FFPE_unrepaired.csv --sample ColoRect-AdenoCA::SP21528 --label Unrepaired --output_dir FFPEsig_OUTPUT```
 ```
- 
+Or 
+
+```
+python FFPEsig.py -i ./Data/simulated_PCAWG_FFPE_unrepaired.csv -s ColoRect-AdenoCA::SP21528 -l Unrepaired -o FFPEsig_OUTPUT```
+```
+
+**Note**
+    1. <Path-to-the-DataFrame> should be a standard CSV format dataframe which contains columns specifying sample IDs
+    2. <Sample_id> is a string point to a specific sample ID which must be contained in <Path-to-the-DataFrame>
+    3. Label option([--label|-l]) must be either of them <Unrepaired|Repaired>.   
+
 # Anlysis code
 Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
 + [FFPE signatures discovery](https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html)
