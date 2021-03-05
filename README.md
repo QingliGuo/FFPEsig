@@ -24,7 +24,7 @@ python FFPEsig.py -i ./Data/simulated_PCAWG_FFPE_unrepaired.csv -s ColoRect-Aden
 + Sample ID, [--sample|-s], must be one of the sample IDs in Input file [--input|-i];
 + Label option, [--label|-l], must be either of them <Unrepaired|Repaired>.
 
-# Anlysis code
+# Analysis code
 Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
 + [FFPE signatures discovery](https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html)
 + [Correction on simulated FFPE data](https://qingliguo.github.io/FFPEsig/Correctting_FFPEnoise_in_SimulatedFFPEs_from_PCAWG.html)
