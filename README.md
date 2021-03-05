@@ -20,9 +20,9 @@ python FFPEsig.py -i ./Data/simulated_PCAWG_FFPE_unrepaired.csv -s ColoRect-Aden
 ```
 
 **Note**
-    1. <Path-to-the-DataFrame> should be a standard CSV format dataframe which contains columns specifying sample IDs
-    2. <Sample_id> is a string point to a specific sample ID which must be contained in <Path-to-the-DataFrame>
-    3. Label option([--label|-l]) must be either of them <Unrepaired|Repaired>.   
++ <Path-to-the-DataFrame> should be a standard CSV format dataframe which contains columns specifying sample IDs
++ <Sample_id> is a string point to a specific sample ID which must be contained in <Path-to-the-DataFrame>
++ Label option([--label|-l]) must be either of them <Unrepaired|Repaired>.
 
 # Anlysis code
 Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
