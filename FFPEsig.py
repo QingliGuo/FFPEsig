@@ -1,31 +1,17 @@
+#!/user/bin/python
+
 ## loading packages
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
-from matplotlib.lines import Line2D
-import numba.targets
-from sklearn.manifold import TSNE
-from scipy.stats import gaussian_kde
+
 from scipy.stats import *
-import scipy.stats as stats
+#import scipy.stats as stats
 import numpy.random as npr
-from sklearn.metrics.pairwise import cosine_similarity
-import math
-import random
-import re
-import matplotlib.patches as patches
-from matplotlib.collections import PatchCollection
-from matplotlib_venn import venn2, venn2_circles, venn2_unweighted
+import sys, getopt
 
-"""
-Usage:
-python FFPEsig.py <FILES> <Sample_ID> <"Repaired"/"Unrepaired">
-"""
-
-file = sys.argv[1] ### files containing sample IDs and 96-channel mutation counts
-sample_id = sys.argv[2]  ### sample ID
-label = sys.argv[3] ### repaired or unrepaired FFPE
+from datetime import datetime, date
 
 ## 96-channel FFPE signatures:
 ffpe_sig_unrepaired = np.array([2.19310372e-03, 1.50230572e-03, 2.24203874e-06, 1.12716230e-03,
@@ -77,116 +63,6 @@ ffpe_sig_repaired = np.array([1.61724954e-02, 1.56844903e-02, 3.51251141e-05, 1.
        1.28756380e-05, 1.43367677e-03, 1.20972905e-02, 1.99129588e-03,
        6.35143737e-04, 8.63907508e-03, 1.10687546e-02, 1.21009826e-04,
        2.09275976e-03, 2.99090939e-03, 1.41497076e-02, 2.09607451e-03])
-
-
-def SBS96_plot(sig, label = "", name = "", file = False, norm = False,
-               width = 10, height = 2, bar_width = 1, 
-               xticks_label = False, grid = 0.2, s = 10):
-    """
-    This function plots 96-channel profile for a given signature or mutational catalogue.   
-        Author: Qingli Guo <qingli.guo@helsinki.fi>/<qingliguo@outlook.com>
-    Required:
-        sig: 96-channel mutation counts/probabilities
-    Optional arguments(default values see above):
-        label: to identify the plot, e.g. sample ID
-        name: to add extra information inside of the plot, e.g. "Biological"
-        file: file name where to save the plot if given
-        norm: to normlize provided 96-channel vector or not
-        width: width of the plot
-        height: height of the plot
-        bar_width: bar_width of the plot
-        xticks_label: to show the xticks channel information or not
-        grid: grid of the plot
-        s: fontsize of the figure main text    
-    """
-    
-    channel = 96
-    col_set = ['deepskyblue','black','red','lightgrey','yellowgreen','pink']
-    col_list = []
-    for i in range (len(col_set)):
-        col_list += [col_set[i]] * 16
-    
-    sns.set(rc={"figure.figsize":(width, height)})
-    sns.set(style="whitegrid", color_codes=True, rc={"grid.linewidth": grid, 'grid.color': '.7', 'ytick.major.size': 2,
-                                                 'axes.edgecolor': '.3', 'axes.linewidth': 1.35,})
-
-    channel6 = ['C>A','C>G','C>T','T>A','T>C','T>G']
-    channel96 = ['ACA', 'ACC', 'ACG', 'ACT', 'CCA', 'CCC', 'CCG', 'CCT', 'GCA',
-               'GCC', 'GCG', 'GCT', 'TCA', 'TCC', 'TCG', 'TCT', 'ACA', 'ACC',
-               'ACG', 'ACT', 'CCA', 'CCC', 'CCG', 'CCT', 'GCA', 'GCC', 'GCG',
-               'GCT', 'TCA', 'TCC', 'TCG', 'TCT', 'ACA', 'ACC', 'ACG', 'ACT',
-               'CCA', 'CCC', 'CCG', 'CCT', 'GCA', 'GCC', 'GCG', 'GCT', 'TCA',
-               'TCC', 'TCG', 'TCT', 'ATA', 'ATC', 'ATG', 'ATT', 'CTA', 'CTC',
-               'CTG', 'CTT', 'GTA', 'GTC', 'GTG', 'GTT', 'TTA', 'TTC', 'TTG',
-               'TTT', 'ATA', 'ATC', 'ATG', 'ATT', 'CTA', 'CTC', 'CTG', 'CTT',
-               'GTA', 'GTC', 'GTG', 'GTT', 'TTA', 'TTC', 'TTG', 'TTT', 'ATA',
-               'ATC', 'ATG', 'ATT', 'CTA', 'CTC', 'CTG', 'CTT', 'GTA', 'GTC',
-               'GTG', 'GTT', 'TTA', 'TTC', 'TTG', 'TTT']
-    
-    ## plot the normalized version:
-    if norm:
-        normed_sig = sig / np.sum(sig)
-        plt.bar(range(channel), normed_sig , width = bar_width, color = col_list)
-        plt.xticks(rotation = 90, size = 7, weight = 'bold')
-        plt.ylim (0, np.max(normed_sig) * 1.15)
-        plt.annotate (name,(90 - len(name), np.max(sig) * 0.95), size = s)
-        plt.ylabel("Frequency")
-
-    ## plot the original version:
-    else:
-        plt.bar(range(channel), sig , width = bar_width, color =col_list)
-        plt.xticks(rotation = 90, size = 7, weight = 'bold')
-        plt.ylim (0,np.max(sig) * 1.15)
-        
-        if  np.round(np.sum (sig)) != 1:
-            plt.annotate ('Total Count : ' + format(np.sum(sig), ','), (0, np.max(sig)))
-        plt.ylabel("Number of\nSBSs")
-        plt.annotate (name,(90 - len(name), np.max(sig) * 0.95), size = s)
-    
-    if xticks_label:
-        plt.xticks(range(channel), channel96, rotation = 90, ha = "center", va= "center",  size = 7)
-    else:
-        plt.xticks([], [])
-        
-    plt.yticks( va= "center",  size = s)
-    
-    ## plot the bar annotation:
-    text_col = ["w","w","w","black","black","black"]
-    for i in range(6):       
-        left, width = 0 + 1/6 * i + 0.001, 1/6 - 0.002
-        bottom, height = 1.003, 0.15
-        right = left + width
-        top = bottom + height
-        ax = plt.gca()
-        p = plt.Rectangle((left, bottom), width, height, fill=True, color = col_set[i])
-        p.set_transform(ax.transAxes)
-        p.set_clip_on(False)
-        ax.add_patch(p)
-        ax.text(0.5 * (left + right), 0.5 * (bottom + top), channel6[i], 
-                color = text_col[i], weight='bold',size = s,
-                horizontalalignment='center',verticalalignment='center', 
-                transform=ax.transAxes)
-    
-    ## plot the name annotation
-    if label != "":
-        left, width = 1.003, 0.05
-        bottom, height = 0, 1
-        right = left + width
-        top = bottom + height
-        ax = plt.gca()
-        p = plt.Rectangle((left, bottom), width, height, fill = True, color = "silver",alpha = 0.3)
-        p.set_transform(ax.transAxes)
-        p.set_clip_on(False)
-        ax.add_patch(p)
-        ax.text(0.505 * (left + right), 0.5 * (bottom + top), label, color = "black",size = s,
-                horizontalalignment='center',verticalalignment='center',
-                transform=ax.transAxes , rotation = 90)
-
-    ax.margins(x=0.002, y=0.002)
-    plt.tight_layout()
-    if file:
-        plt.savefig(file, bbox_inches = "tight", dpi = 300)
-    plt.show()
 
 def sig_extraction (V, W1, rank = 2, iteration = 3000, precision=0.95):
     
@@ -301,19 +177,229 @@ def correct_FFPE_profile(V, W1, sample_id="", precision = 0.95, ite = 100):
     
     return ([corrected_profile, df_tmp])
 
-
-df = pd.read_csv (file)
-if label == "Unrepaired":
-    corrected_profile, corrected_solutions = correct_FFPE_profile(V = df[sample_id].to_numpy(),
-                                                                   W1 = ffpe_sig_unrepaired,
-                                                                    sample_id = sample_id)
-elif label == "Repaired":
-    corrected_profile, corrected_solutions = correct_FFPE_profile(V = df[sample_id].to_numpy(),
-                                                                   W1 = ffpe_sig_repaired,
-                                                                    sample_id = sample_id)
+def SBS96_plot(sig, label = "", name = "", file = False, norm = False,
+               width = 10, height = 2, bar_width = 1, 
+               xticks_label = False, grid = 0.2, s = 10):
+    """
+    This function plots 96-channel profile for a given signature or mutational catalogue.   
+        Author: Qingli Guo <qingli.guo@helsinki.fi>/<qingliguo@outlook.com>
+    Required:
+        sig: 96-channel mutation counts/probabilities
+    Optional arguments(default values see above):
+        label: to identify the plot, e.g. sample ID
+        name: to add extra information inside of the plot, e.g. "Biological"
+        file: file name where to save the plot if given
+        norm: to normlize provided 96-channel vector or not
+        width: width of the plot
+        height: height of the plot
+        bar_width: bar_width of the plot
+        xticks_label: to show the xticks channel information or not
+        grid: grid of the plot
+        s: fontsize of the figure main text    
+    """
     
+    channel = 96
+    col_set = ['deepskyblue','black','red','lightgrey','yellowgreen','pink']
+    col_list = []
+    for i in range (len(col_set)):
+        col_list += [col_set[i]] * 16
+    
+    sns.set(rc={"figure.figsize":(width, height)})
+    sns.set(style="whitegrid", color_codes=True, rc={"grid.linewidth": grid, 'grid.color': '.7', 'ytick.major.size': 2,
+                                                 'axes.edgecolor': '.3', 'axes.linewidth': 1.35,})
 
-OUTPUT1 = sample_id + "_corrected_profile.csv"
-OUTPUT2 = sample_id + "_all_solutions.csv"
-corrected_profile.to_csv(OUTPUT1, encoding='utf-8', index=False)
-corrected_profiles_df.to_csv(OUTPUT2, encoding='utf-8', index=False)
+    channel6 = ['C>A','C>G','C>T','T>A','T>C','T>G']
+    channel96 = ['ACA', 'ACC', 'ACG', 'ACT', 'CCA', 'CCC', 'CCG', 'CCT', 'GCA',
+               'GCC', 'GCG', 'GCT', 'TCA', 'TCC', 'TCG', 'TCT', 'ACA', 'ACC',
+               'ACG', 'ACT', 'CCA', 'CCC', 'CCG', 'CCT', 'GCA', 'GCC', 'GCG',
+               'GCT', 'TCA', 'TCC', 'TCG', 'TCT', 'ACA', 'ACC', 'ACG', 'ACT',
+               'CCA', 'CCC', 'CCG', 'CCT', 'GCA', 'GCC', 'GCG', 'GCT', 'TCA',
+               'TCC', 'TCG', 'TCT', 'ATA', 'ATC', 'ATG', 'ATT', 'CTA', 'CTC',
+               'CTG', 'CTT', 'GTA', 'GTC', 'GTG', 'GTT', 'TTA', 'TTC', 'TTG',
+               'TTT', 'ATA', 'ATC', 'ATG', 'ATT', 'CTA', 'CTC', 'CTG', 'CTT',
+               'GTA', 'GTC', 'GTG', 'GTT', 'TTA', 'TTC', 'TTG', 'TTT', 'ATA',
+               'ATC', 'ATG', 'ATT', 'CTA', 'CTC', 'CTG', 'CTT', 'GTA', 'GTC',
+               'GTG', 'GTT', 'TTA', 'TTC', 'TTG', 'TTT']
+    
+    ## plot the normalized version:
+    if norm:
+        normed_sig = sig / np.sum(sig)
+        plt.bar(range(channel), normed_sig , width = bar_width, color = col_list)
+        plt.xticks(rotation = 90, size = 7, weight = 'bold')
+        plt.ylim (0, np.max(normed_sig) * 1.15)
+        plt.annotate (name,(90 - len(name), np.max(sig) * 0.95), size = s)
+        plt.ylabel("Frequency")
+
+    ## plot the original version:
+    else:
+        plt.bar(range(channel), sig , width = bar_width, color =col_list)
+        plt.xticks(rotation = 90, size = 7, weight = 'bold')
+        plt.ylim (0,np.max(sig) * 1.15)
+        
+        if  np.round(np.sum (sig)) != 1:
+            plt.annotate ('Total Count : ' + format(np.sum(sig), ','), (0, np.max(sig)))
+        plt.ylabel("Number of\nSBSs")
+        plt.annotate (name,(90 - len(name), np.max(sig) * 0.95), size = s)
+    
+    if xticks_label:
+        plt.xticks(range(channel), channel96, rotation = 90, ha = "center", va= "center",  size = 7)
+    else:
+        plt.xticks([], [])
+        
+    plt.yticks( va= "center",  size = s)
+    
+    ## plot the bar annotation:
+    text_col = ["w","w","w","black","black","black"]
+    for i in range(6):       
+        left, width = 0 + 1/6 * i + 0.001, 1/6 - 0.002
+        bottom, height = 1.003, 0.15
+        right = left + width
+        top = bottom + height
+        ax = plt.gca()
+        p = plt.Rectangle((left, bottom), width, height, fill=True, color = col_set[i])
+        p.set_transform(ax.transAxes)
+        p.set_clip_on(False)
+        ax.add_patch(p)
+        ax.text(0.5 * (left + right), 0.5 * (bottom + top), channel6[i], 
+                color = text_col[i], weight='bold',size = s,
+                horizontalalignment='center',verticalalignment='center', 
+                transform=ax.transAxes)
+    
+    ## plot the name annotation
+    if label != "":
+        left, width = 1.003, 0.05
+        bottom, height = 0, 1
+        right = left + width
+        top = bottom + height
+        ax = plt.gca()
+        p = plt.Rectangle((left, bottom), width, height, fill = True, color = "silver",alpha = 0.3)
+        p.set_transform(ax.transAxes)
+        p.set_clip_on(False)
+        ax.add_patch(p)
+        ax.text(0.505 * (left + right), 0.5 * (bottom + top), label, color = "black",size = s,
+                horizontalalignment='center',verticalalignment='center',
+                transform=ax.transAxes , rotation = 90)
+
+    ax.margins(x=0.002, y=0.002)
+    plt.tight_layout()
+    if file:
+        plt.savefig(file, bbox_inches = "tight", dpi = 300)
+
+def main():
+    today = date.today()
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    print(f"Start FFPEsig at {current_time} on {today}")
+
+    usage = """    
+FFPEsig uses FFPE signature as a noise profile to correct the observed mutation counts from a given FFPE WGS sample.
+------------------------
+To run FFPEsig using command-line:
+
+    python FFPEsig.py [--input|-i] <Path-to-the-DataFrame> [--sample|-s] <Sample_id> [--label|-l] <Unrepaired|Repaired> [--output_dir|-o] <Path-of-output-folder>
+
+------------------------    
+Example:
+
+    python FFPEsig.py --input ./Data/simulated_PCAWG_FFPE_unrepaired.csv --sample ColoRect-AdenoCA::SP21528 --label Unrepaired --output_dir FFPEsig_OUTPUT
+
+    OR
+    
+    python FFPEsig.py -i ./Data/simulated_PCAWG_FFPE_unrepaired.csv -s ColoRect-AdenoCA::SP21528 -l Unrepaired -o FFPEsig_OUTPUT
+------------------------    
+Note:
+
+    1. Input file, [--input|-i], must be a standard CSV format dataframe which contains columns specifying sample IDs;
+    2. Sample ID, [--sample|-s], must be one of the sample IDs in Input file [--input|-i];
+    3. Label option, [--label|-l], must be either of them <Unrepaired|Repaired>.
+    
+    """
+    
+    # Get full command-line arguments
+    full_cmd_arguments = sys.argv
+
+    # Keep all but the first
+    argument_list = full_cmd_arguments[1:]
+    
+    short_options = "hi:s:l:o:t:p:"
+    long_options = ["help", "input=", "sample=", "label=","output_dir=", "iteration= ", "precision="]
+    
+    try:
+        arguments, values = getopt.getopt(argument_list, short_options, long_options)
+    except getopt.error as err:
+        print (str(err))
+        sys.exit(2)
+        
+    arg_length = 0 ## count required argument number
+    ite = 100
+    prec = 0.95
+    
+    # Evaluate given options
+    for current_argument, current_value in arguments:
+        if current_argument in ("-h", "--help"):
+            call_for_help = usage
+            print (usage)
+            sys.exit(2)
+        elif current_argument in ("-i", "--input"):
+            file = current_value
+            arg_length += 1
+            print (f'\tInput file: {file}')
+        elif current_argument in ("-s", "--sample"):
+            sample_id = current_value
+            arg_length += 1
+            print (f'\tSample ID: {sample_id}')
+        elif current_argument in ("-l", "--label"):
+            label = current_value
+            arg_length += 1
+            print (f"\tCorrecting {label} FFPE sample")
+        elif current_argument in ("-o", "--output_dir"):
+            out_dir = current_value
+            arg_length += 1
+            print (f"\tOutput folder: {out_dir}")
+
+    if arg_length != 4:
+        print ("Four correct arguments are required to run FFPEsig.")
+        print (usage)
+        sys.exit(2)
+    
+    df = pd.read_csv (file)
+    
+    if label == "Unrepaired":
+        corrected_profile, corrected_solutions = correct_FFPE_profile(V = df[sample_id].to_numpy(),
+                                                                      W1 = ffpe_sig_unrepaired,
+                                                                      sample_id = sample_id, 
+                                                                      ite = ite, precision = prec)
+    elif label == "Repaired":
+        corrected_profile, corrected_solutions = correct_FFPE_profile(V = df[sample_id].to_numpy(),
+                                                                      W1 = ffpe_sig_repaired,
+                                                                      sample_id = sample_id,
+                                                                      ite = ite, precision = prec)
+    OUTPUT1 = out_dir + "/" + sample_id + "_corrected_profile.csv"
+    OUTPUT2 = out_dir + "/" + sample_id + "_all_solutions.csv"
+    plot_bef = out_dir + "/" + sample_id + "_before_correction.pdf"
+    plot_aft = out_dir + "/" + sample_id + "_after_correction.pdf"
+    
+    ## final solution
+    df_tmp = pd.DataFrame()
+    df_tmp[sample_id] = corrected_profile
+    df_tmp.to_csv(OUTPUT1, encoding='utf-8', index=False)
+    
+    ## all solutions
+    corrected_solutions.to_csv(OUTPUT2, encoding='utf-8', index=False)
+    
+    ## plot SBS channels before correction
+    f1= SBS96_plot(df[sample_id], label = f"{sample_id}\n", 
+               name = "Original", file = plot_bef,
+               height = 2, width = 10, s = 11)
+    
+    ## plot SBS channels after correction
+    f2= SBS96_plot(corrected_profile, label = f"{sample_id}\n", 
+               name = "Corrected", file = plot_aft,
+               height = 2, width = 10, s = 11)
+    
+    now = datetime.now()
+    current_time = now.strftime("%H:%M:%S")
+    print (f'Done for {sample_id} at {current_time} on {today}')
+
+if __name__ == "__main__":
+    main()
