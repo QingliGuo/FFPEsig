@@ -33,4 +33,4 @@ Here we include analysis codes and data used in our manuscript entitled "The mut
 
 # Citation
 
-Our preprint is avaiable in bioRxiv doi: https://doi.org/10.1101/2021.03.11.434918. [Check it out NOW!](https://www.biorxiv.org/content/10.1101/2021.03.11.434918v1). 
+Our preprint is avaiable in bioRxiv. [Check it out NOW!](https://www.biorxiv.org/content/10.1101/2021.03.11.434918v1). 
