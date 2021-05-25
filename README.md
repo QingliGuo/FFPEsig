@@ -25,7 +25,7 @@ python FFPEsig.py -i ./Data/simulated_PCAWG_FFPE_unrepaired.csv -s ColoRect-Aden
 + Input file, [--input|-i], must be a standard CSV format dataframe which column names are the sample IDs;
 + Sample ID, [--sample|-s], must be one of the sample IDs in Input file [--input|-i];
 + Label option, [--label|-l], must be either of them <Unrepaired|Repaired>.
-+ The total running time for one sample is around 1-3 mins on a local Mac computer (3,1 GHz Intel Core i5).
++ The total running time of FFPEsig for one sample is around 1-3 mins on a local desk computer (3,1 GHz Intel Core i5).
 
 # Analysis code
 Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
