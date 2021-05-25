@@ -4,7 +4,7 @@ FFPEsig uses FFPE signature as a noise profile to correct the observed mutation 
 
 1. To run FFPEsig:
 + Download [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py)
-+ Install [python 3](https://www.python.org/downloads/) (3.7.6) and the packages required in [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py), including pandas (1.0.1), numpy (1.18.1), matplotlib (3.1.3), seaborn (0.10.1).
++ Install [python 3](https://www.python.org/downloads/) (3.7.6) and import the packages required in [FFPEsig.py](https://github.com/QingliGuo/FFPEsig/blob/main/FFPEsig.py), including pandas (1.0.1), numpy (1.18.1), matplotlib (3.1.3), seaborn (0.10.1).
 
 + Run the command line:
 ```
