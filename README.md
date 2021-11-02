@@ -31,6 +31,7 @@ python FFPEsig.py -i ./Data/simulated_PCAWG_FFPE_unrepaired.csv -s ColoRect-Aden
 Here we include analysis codes and data used in our manuscript entitled "The mutational signatures of formalin fixation on the human genome".
 + [FFPE signatures discovery](https://qingliguo.github.io/FFPEsig/FFPEsig_discovery.html)
 + [Correction on simulated FFPE data](https://qingliguo.github.io/FFPEsig/Correctting_FFPEnoise_in_SimulatedFFPEs_from_PCAWG.html)
++ [Correction_impact on sig decomposition](https://qingliguo.github.io/FFPEsig/SigDecomposition_using_corrected_and_uncorrected_FFPEprofiles.html)
 + [WGS CRC FFPEs](https://qingliguo.github.io/FFPEsig/Correcting_FFPEnoise_in_WGS_FFPE_CRCs.html )
 + [Comparing refitted attributions of 96c and 80c sig](https://qingliguo.github.io/FFPEsig/Comparing_refitting_results_of_96c_80c_sig.html)
 
