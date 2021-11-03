@@ -1,0 +1,27 @@
+cancer_type	SNR_median	Recommendation	well_corrected_samples	total_sample	SNR_cutoff_0.1_passed
+Biliary-AdenoCA	0.20788790219126452	Repaired	24	35	Passed
+Bladder-TCC	0.6208510843962138	Repaired	21	23	Passed
+Bone-Osteosarc	0.10094555766768765	Repaired	25	38	Passed
+Breast-AdenoCA	0.16043499428614333	Repaired	128	198	Passed
+CNS-GBM	0.32934803126517675	Unrepaired	41	41	Passed
+CNS-Medullo	0.042358382646150564	Unrepaired	51	146	Not Passed
+CNS-PiloAstro	0.0074328257589381256	Unrepaired	2	89	Not Passed
+ColoRect-AdenoCA	0.5684746455909964	Unrepaired	59	60	Passed
+Eso-AdenoCA	0.5034821090887818	Unrepaired	78	98	Passed
+Head-SCC	0.3619171953668443	Repaired	42	57	Passed
+Kidney-ChRCC	0.07047123943943692	Unrepaired	24	45	Not Passed
+Kidney-RCC	0.1487506905828373	Repaired	124	144	Passed
+Liver-HCC	0.23908024238430933	Repaired	315	326	Passed
+Lung-AdenoCA	0.440636182446268	Repaired	29	38	Passed
+Lung-SCC	0.8407790567999992	Repaired	48	48	Passed
+Lymph-BNHL	0.2052030439758207	Unrepaired	38	107	Passed
+Lymph-CLL	0.07385735043579701	Unrepaired	38	95	Not Passed
+Myeloid-MPN	0.05877446810551386	Unrepaired	18	56	Not Passed
+Ovary-AdenoCA	0.19590273160139976	Repaired	69	113	Passed
+Panc-AdenoCA	0.222146234983002	Unrepaired	221	241	Passed
+Panc-Endocrine	0.06866812198815797	Repaired	38	85	Not Passed
+Prost-AdenoCA	0.11659659618135657	Unrepaired	202	286	Passed
+Skin-Melanoma	5.710836931388302	Repaired	103	107	Passed
+Stomach-AdenoCA	0.35136232804670703	Unrepaired	57	75	Passed
+Thy-AdenoCA	0.04390920294274931	Unrepaired	12	48	Not Passed
+Uterus-AdenoCA	0.25670183245308453	Unrepaired	48	51	Passed
