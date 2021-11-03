@@ -11,6 +11,7 @@ from scipy.stats import *
 import scipy.stats as stats
 import numpy.random as npr
 from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics import confusion_matrix
 import math
 import random
 import re
@@ -361,3 +362,39 @@ def sig_refitting (V, W, iteration = 3000, precision=0.95):
                 break
 
     return (H, Loss_KL[0:ite])
+
+def plot_confusion_matrix(cf_matrix, f=None, target_names=None, title = None):
+
+    group_names = ['TN', 'FP', 'FN', 'TP']
+    group_counts = ["{0:.0f}".format(value) for value in 
+                    cf_matrix.flatten()]
+    group_percentages = ["{0:.2%}".format(value) for value in 
+                         cf_matrix.flatten()/np.sum(cf_matrix)]
+    labels = [f"{v1}\n{v2}\n{v3}" for v1, v2, v3 in 
+              zip(group_names,
+                  group_counts,
+                  group_percentages)
+             ]
+    labels = np.asarray(labels).reshape(2, 2)
+
+    plt.figure(figsize = (5, 2))
+    sns.heatmap(cf_matrix, annot=labels, fmt='', cmap='Blues',  annot_kws={"size": 11})
+    if target_names:
+        tick_marks = range(len(target_names))
+        plt.xticks(tick_marks, target_names,ha='right')
+        plt.yticks(tick_marks, target_names,ha='center')
+    if title:
+        plt.title (title,fontsize = 12)
+
+    precision = cf_matrix[1, 1] / sum(cf_matrix[:, 1])
+    recall    = cf_matrix[1, 1] / sum(cf_matrix[1,:])
+    accuracy  = np.trace(cf_matrix) / float(np.sum(cf_matrix))
+    f1_score  = 2 * precision * recall / (precision + recall)
+    
+    stats_text = "Precision={:0.2f}; Recall={:0.2f}; Accuracy={:0.2f}; F1 Score={:0.2f}".format(
+        precision, recall, accuracy, f1_score)
+    plt.xlabel('Predicted label\n\n{}'.format(stats_text), fontsize = 11)
+    plt.ylabel("True Label",fontsize = 11)
+    if f:
+        plt.savefig(f, bbox_inches = "tight", dpi = 300)
+    plt.show()
