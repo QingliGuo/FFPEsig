@@ -13242,98 +13242,9 @@ div#notebook {
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">FFPE_profiles</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Basic_types&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">/</span><span class="n">FFPE_profiles</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;Basic_types&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 <span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
-<span class="n">df_tmp</span>
 </pre></div>
 
     </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt output_prompt">Out[6]:</div>
-
-
-
-<div class="output_html rendered_html output_subarea output_execute_result">
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Basic_types</th>
-      <th>Unrepaired</th>
-      <th>Repaired</th>
-      <th>Concordant</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>C&gt;A</td>
-      <td>0.081476</td>
-      <td>0.096447</td>
-      <td>0.098077</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>C&gt;G</td>
-      <td>0.076883</td>
-      <td>0.073358</td>
-      <td>0.076923</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>C&gt;T</td>
-      <td>0.233961</td>
-      <td>0.249222</td>
-      <td>0.258654</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>T&gt;A</td>
-      <td>0.091867</td>
-      <td>0.089406</td>
-      <td>0.091346</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>T&gt;C</td>
-      <td>0.411822</td>
-      <td>0.398068</td>
-      <td>0.369231</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>T&gt;G</td>
-      <td>0.103991</td>
-      <td>0.093499</td>
-      <td>0.105769</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-</div>
-
-</div>
-
 </div>
 </div>
 
@@ -13392,7 +13303,7 @@ div#notebook {
     <span class="n">prop</span> <span class="o">=</span> <span class="n">df_tmp</span><span class="p">[</span><span class="n">df_tmp</span><span class="p">[</span><span class="s2">&quot;Basic_types&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;T&gt;C&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">:][</span><span class="n">col</span><span class="p">]</span>
     <span class="n">ax</span><span class="o">.</span><span class="n">axvline</span> <span class="p">(</span><span class="n">prop</span><span class="p">,</span> <span class="n">linestyle</span> <span class="o">=</span> <span class="s2">&quot;--&quot;</span><span class="p">,</span> <span class="n">color</span> <span class="o">=</span> <span class="n">cols</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">label</span> <span class="o">=</span> <span class="n">col</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">T&gt;C freq&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span><span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./Figures/SF8b.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./Figures/SFig13b.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -13501,7 +13412,7 @@ div#notebook {
                    <span class="n">cbar_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shrink&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">6</span><span class="p">,</span>  <span class="s1">&#39;aspect&#39;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;ticks&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
                                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Cosine Similarity&quot;</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;PCAWG CRC(96-channel)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./Figures/SFig9a.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="s2">&quot;./Figures/SFig14a.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -13656,7 +13567,7 @@ div#notebook {
 
 <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">compute_withinGroup_betweenGroup_diff</span><span class="p">(</span><span class="n">crc_PCAWG_norm</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,:],</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;all 96-channel&quot;</span><span class="p">,</span> 
                                                 <span class="n">plot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">legend_flag</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">6</span><span class="p">,</span> 
-                                                <span class="n">height</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SF10a.pdf&quot;</span><span class="p">)</span>
+                                                <span class="n">height</span> <span class="o">=</span> <span class="mf">2.5</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig15a.pdf&quot;</span><span class="p">)</span>
 <span class="n">total_96c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">+</span> <span class="n">c</span><span class="p">)</span>
 <span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;sum (log10 (- p-values): &quot;</span><span class="p">,</span> <span class="n">total_96c</span><span class="p">)</span>
 </pre></div>
@@ -13875,7 +13786,7 @@ all 96-channel MSS(n=903)	mean:0.90
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">tag</span> <span class="ow">in</span> <span class="n">df_tmp_sorted</span><span class="p">[</span><span class="s1">&#39;types&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
     <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span> <span class="o">=</span> <span class="n">compute_withinGroup_betweenGroup_diff</span><span class="p">(</span><span class="n">crc_PCAWG_norm</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">tag</span><span class="p">,:],</span> <span class="n">title</span> <span class="o">=</span> <span class="n">tag</span><span class="p">,</span> <span class="n">plot</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> 
                                                    <span class="n">legend_flag</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> 
-                                                    <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig10b_&quot;</span> <span class="o">+</span> <span class="n">tag</span> <span class="o">+</span> <span class="s2">&quot;.pdf&quot;</span><span class="p">)</span>
+                                                    <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig15b_&quot;</span> <span class="o">+</span> <span class="n">tag</span> <span class="o">+</span> <span class="s2">&quot;.pdf&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -14122,7 +14033,7 @@ C&gt;A MSS(n=903)	mean:0.97
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="n">fontsize</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span> <span class="n">frameon</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span> <span class="p">(</span><span class="s2">&quot;./Figures/SF10b_1.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span> <span class="p">(</span><span class="s2">&quot;./Figures/SFig15b_7.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -14185,7 +14096,7 @@ C&gt;A MSS(n=903)	mean:0.97
                    <span class="n">cbar_kws</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shrink&#39;</span><span class="p">:</span> <span class="o">.</span><span class="mi">6</span><span class="p">,</span>  <span class="s1">&#39;aspect&#39;</span><span class="p">:</span><span class="mi">8</span><span class="p">,</span><span class="s1">&#39;ticks&#39;</span> <span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span><span class="mi">5</span><span class="p">),</span>
                                <span class="s1">&#39;label&#39;</span><span class="p">:</span> <span class="sa">f</span><span class="s2">&quot;Cosine Similarity&quot;</span><span class="p">})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;PCAWG CRC(C&gt;A and C&gt;T mutations)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span> <span class="p">(</span><span class="s2">&quot;./Figures/SF9b.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">savefig</span> <span class="p">(</span><span class="s2">&quot;./Figures/SFig14b.pdf&quot;</span><span class="p">,</span> <span class="n">bbox_inches</span> <span class="o">=</span> <span class="s2">&quot;tight&quot;</span><span class="p">,</span> <span class="n">dpi</span> <span class="o">=</span> <span class="mi">300</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 
@@ -14669,7 +14580,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">unrepaired_before_correction</span> <span class="o">=</span> <span class="n">FFPE_profiles</span><span class="p">[</span><span class="s1">&#39;Unrepaired&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -14706,9 +14617,17 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Due to the overwhelming T&gt;C mutations, the main signal in C&gt;T channels are not visible. Thus, we remove the T&gt;C channels in our main figure to highlight the signal.</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">unrepaired_before_correction</span><span class="p">[</span><span class="n">T2C_ind</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
@@ -14791,7 +14710,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_unrepaired_act</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -14836,7 +14755,7 @@ C&gt;A MSS(n=903)	mean:0.97
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[26]:</div>
+    <div class="prompt output_prompt">Out[24]:</div>
 
 
 
@@ -14902,7 +14821,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_tmp</span> <span class="o">=</span> <span class="n">df_unrepaired_act</span><span class="o">.</span><span class="n">T</span>
@@ -14976,7 +14895,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">repaired_before_correction</span> <span class="o">=</span> <span class="n">FFPE_profiles</span><span class="p">[</span><span class="s1">&#39;Repaired&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -15015,17 +14934,17 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">repaired_before_correction</span><span class="p">[</span><span class="n">T2C_ind</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">repaired_after_correction</span><span class="p">[</span><span class="n">T2C_ind</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
 
 <span class="n">SBS96_plot_specified</span><span class="p">(</span><span class="n">repaired_before_correction</span><span class="p">,</span> <span class="n">bar_width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Repaired</span><span class="se">\n</span><span class="s1">FFPE&#39;</span><span class="p">,</span>
-                      <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Before</span><span class="se">\n</span><span class="s2">Correction&quot;</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig11a.pdf&quot;</span><span class="p">,</span>
+                      <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;Before</span><span class="se">\n</span><span class="s2">Correction&quot;</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig16a.pdf&quot;</span><span class="p">,</span>
                      <span class="n">s</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span> <span class="n">width</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">1.7</span><span class="p">)</span>
 <span class="n">SBS96_plot_specified</span><span class="p">(</span><span class="n">repaired_after_correction</span><span class="p">,</span> <span class="n">bar_width</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="s1">&#39;Repaired</span><span class="se">\n</span><span class="s1">FFPE&#39;</span><span class="p">,</span>
-                    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;After</span><span class="se">\n</span><span class="s2">Correction&quot;</span><span class="p">,</span>  <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig11b.pdf&quot;</span><span class="p">,</span>
+                    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;After</span><span class="se">\n</span><span class="s2">Correction&quot;</span><span class="p">,</span>  <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig16b.pdf&quot;</span><span class="p">,</span>
                      <span class="n">s</span> <span class="o">=</span> <span class="mi">11</span><span class="p">,</span><span class="n">width</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="mf">1.7</span><span class="p">)</span>
 
 <span class="n">repaired_cs_before</span> <span class="o">=</span> <span class="n">cosine_similarity</span> <span class="p">(</span><span class="n">concordant_profile</span><span class="p">[</span><span class="n">C2T_ind</span><span class="p">]</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">16</span><span class="p">),</span>
@@ -15117,7 +15036,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">acc_concordant</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
@@ -15138,7 +15057,7 @@ C&gt;A MSS(n=903)	mean:0.97
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[30]:</div>
+    <div class="prompt output_prompt">Out[28]:</div>
 
 
 
@@ -15204,7 +15123,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span> <span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">2.7</span><span class="p">,</span><span class="mf">2.3</span><span class="p">))</span>
@@ -15262,7 +15181,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">crc_PCAWG_norm_MSS</span> <span class="o">=</span>  <span class="n">crc_PCAWG_norm</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span>
@@ -15430,7 +15349,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Original samples:</span>
@@ -15449,7 +15368,7 @@ C&gt;A MSS(n=903)	mean:0.97
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[33]:</div>
+    <div class="prompt output_prompt">Out[31]:</div>
 
 
 
@@ -15558,7 +15477,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## simulated samples:</span>
@@ -15740,7 +15659,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[35]:</div>
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">crc_PCAWG_norm_MSI</span> <span class="o">=</span>  <span class="n">crc_PCAWG_norm</span><span class="o">.</span><span class="n">loc</span><span class="p">[:,</span>
@@ -15754,7 +15673,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">comparison_unrepaired_profiles_MSI_MSS</span><span class="p">(</span><span class="n">ind</span><span class="p">,</span> <span class="n">tag</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -15871,12 +15790,12 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[37]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## using C&gt;A and C&gt;T</span>
 <span class="n">C2A_C2T_ind</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&gt;A&quot;</span> <span class="o">==</span> <span class="n">i</span> <span class="ow">or</span> <span class="s2">&quot;C&gt;T&quot;</span> <span class="o">==</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">FFPE_profiles</span><span class="p">[</span><span class="s2">&quot;Basic_types&quot;</span><span class="p">]]</span>
-<span class="n">comparison_unrepaired_profiles_MSI_MSS</span><span class="p">(</span><span class="n">ind</span> <span class="o">=</span> <span class="n">C2A_C2T_ind</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;C&gt;A &amp; C&gt;T&quot;</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig12a.pdf&quot;</span><span class="p">)</span>
+<span class="n">comparison_unrepaired_profiles_MSI_MSS</span><span class="p">(</span><span class="n">ind</span> <span class="o">=</span> <span class="n">C2A_C2T_ind</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;C&gt;A &amp; C&gt;T&quot;</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig17a.pdf&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15908,11 +15827,11 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[38]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## Using C&gt;T mutations</span>
-<span class="n">comparison_unrepaired_profiles_MSI_MSS</span><span class="p">(</span><span class="n">ind</span> <span class="o">=</span> <span class="n">C2T_ind</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;C&gt;T&quot;</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig12b.pdf&quot;</span><span class="p">)</span>
+<span class="n">comparison_unrepaired_profiles_MSI_MSS</span><span class="p">(</span><span class="n">ind</span> <span class="o">=</span> <span class="n">C2T_ind</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;C&gt;T&quot;</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig17b.pdf&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15944,12 +15863,12 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[39]:</div>
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## using C&gt;A </span>
 <span class="n">C2A_ind</span> <span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&gt;A&quot;</span> <span class="o">==</span> <span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">FFPE_profiles</span><span class="p">[</span><span class="s2">&quot;Basic_types&quot;</span><span class="p">]]</span>
-<span class="n">comparison_unrepaired_profiles_MSI_MSS</span><span class="p">(</span><span class="n">ind</span> <span class="o">=</span> <span class="n">C2A_ind</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;C&gt;A&quot;</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig12c.pdf&quot;</span><span class="p">)</span>
+<span class="n">comparison_unrepaired_profiles_MSI_MSS</span><span class="p">(</span><span class="n">ind</span> <span class="o">=</span> <span class="n">C2A_ind</span><span class="p">,</span> <span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;C&gt;A&quot;</span><span class="p">,</span> <span class="n">file</span> <span class="o">=</span> <span class="s2">&quot;./Figures/SFig17c.pdf&quot;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -15981,7 +15900,7 @@ C&gt;A MSS(n=903)	mean:0.97
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[40]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">## similarities of C&gt;A mutations before and after correction.</span>
@@ -16000,7 +15919,7 @@ C&gt;A MSS(n=903)	mean:0.97
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[40]:</div>
+    <div class="prompt output_prompt">Out[38]:</div>
 
 
 
