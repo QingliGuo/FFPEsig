@@ -4,7 +4,6 @@ import numpy as np
 import matplotlib.pyplot as plt
 import seaborn as sns
 from matplotlib.lines import Line2D
-import numba.targets
 from sklearn.manifold import TSNE
 from scipy.stats import gaussian_kde
 from scipy.stats import *
@@ -17,7 +16,6 @@ import random
 import re
 import matplotlib.patches as patches
 from matplotlib.collections import PatchCollection
-from matplotlib_venn import venn2, venn2_circles, venn2_unweighted
 
 ## 96-channel FFPE signatures:
 ffpe_sig_unrepaired = np.array([2.19310372e-03, 1.50230572e-03, 2.24203874e-06, 1.12716230e-03,
