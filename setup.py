@@ -18,57 +18,56 @@ import re
 import matplotlib.patches as patches
 from matplotlib.collections import PatchCollection
 ##from matplotlib_venn import venn2, venn2_circles, venn2_unweighted
-
 ## 96-channel FFPE signatures:
 
-ffpe_sig_repaired = np.array([1.22168339e-02, 8.42930640e-05, 1.02294506e-04, 8.78121550e-04,
-       4.43634295e-03, 1.79379252e-03, 6.60203797e-04, 1.96547006e-03,
-       1.04234776e-02, 1.11427938e-03, 2.21066299e-04, 4.34755652e-04,
-       1.92504715e-03, 3.06129721e-04, 2.47744819e-04, 1.21819475e-03,
-       1.80743807e-03, 4.30695847e-04, 1.02294506e-04, 5.13752698e-04,
-       9.55859254e-04, 1.10581955e-03, 7.42390878e-04, 6.93694048e-03,
-       7.91283535e-04, 2.63479666e-03, 0.00000000e+00, 1.25219346e-03,
-       3.84080807e-04, 5.16487305e-04, 4.49764302e-05, 9.15707160e-04,
-       2.88986151e-02, 1.27144594e-02, 1.70648104e-01, 1.66361367e-02,
-       4.01583317e-02, 2.68895110e-02, 1.41605817e-01, 2.46025737e-02,
-       3.12296309e-02, 2.29903884e-02, 1.13173141e-01, 1.99253762e-02,
-       3.27070822e-02, 2.78915640e-02, 1.53128284e-01, 1.71938583e-02,
-       9.04054916e-04, 7.46865335e-04, 4.21072008e-04, 9.39997318e-04,
-       3.17989408e-03, 2.64058163e-04, 2.31066057e-03, 6.48434554e-05,
-       8.19539809e-03, 6.28914292e-04, 2.54202127e-03, 2.63515704e-03,
-       6.90056621e-04, 7.98143025e-05, 1.08125184e-04, 4.37801701e-04,
+ffpe_sig_repaired = np.array([1.22465603e-02, 8.56653818e-05, 1.03959893e-04, 8.92417647e-04,
+       4.37511673e-03, 1.73450017e-03, 6.70952124e-04, 1.99893780e-03,
+       1.04772171e-02, 1.13242021e-03, 2.24665328e-04, 4.41833612e-04,
+       1.95643214e-03, 3.11113610e-04, 2.51778183e-04, 1.21709861e-03,
+       1.83709678e-03, 4.37707712e-04, 1.03959893e-04, 5.22116755e-04,
+       9.71420946e-04, 1.12382265e-03, 7.51322865e-04, 6.77716498e-03,
+       7.94698349e-04, 2.65099320e-03, 0.00000000e+00, 1.22525399e-03,
+       3.90333764e-04, 5.24895883e-04, 4.57086607e-05, 9.10557824e-04,
+       2.90366829e-02, 1.27607966e-02, 1.70732289e-01, 1.66531828e-02,
+       4.03636239e-02, 2.67812697e-02, 1.41655721e-01, 2.45151563e-02,
+       3.12104662e-02, 2.29862339e-02, 1.13156947e-01, 1.98973171e-02,
+       3.24733461e-02, 2.78232912e-02, 1.53158210e-01, 1.72963655e-02,
+       8.74355086e-04, 7.53838338e-04, 4.27927194e-04, 8.94471356e-04,
+       3.06524047e-03, 2.68357114e-04, 2.31900269e-03, 6.58991274e-05,
+       8.22188170e-03, 6.26957730e-04, 2.50626988e-03, 2.60128228e-03,
+       7.01290962e-04, 8.11137047e-05, 1.09885496e-04, 4.44929251e-04,
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
-       5.33402563e-04, 9.54737400e-04, 3.29154160e-03, 2.49934957e-04,
-       0.00000000e+00, 1.05625754e-03, 8.69679634e-03, 1.82579401e-03,
-       2.57323242e-04, 1.64156093e-03, 9.68934425e-03, 1.06914708e-04,
-       1.74960605e-03, 3.22538618e-03, 2.56715874e-03, 2.44986902e-03])
-ffpe_sig_unrepaired = np.array([1.11290494e-03, 7.60204934e-05, 0.00000000e+00, 0.00000000e+00,
-       8.22878009e-04, 9.92882609e-05, 1.79107888e-06, 2.77261877e-04,
-       4.15056647e-04, 6.80763179e-05, 6.48475168e-07, 4.86300697e-05,
-       1.76353601e-04, 6.36914873e-05, 1.51481134e-06, 9.22331718e-06,
-       3.93275517e-04, 1.46031374e-05, 0.00000000e+00, 1.79528200e-05,
-       0.00000000e+00, 4.16666553e-06, 1.79107888e-06, 6.76825740e-04,
-       8.36952352e-05, 2.85671089e-04, 0.00000000e+00, 2.63707949e-06,
-       5.22120372e-06, 1.34482806e-05, 2.69696500e-05, 3.77358334e-06,
-       1.15948513e-01, 5.98961086e-02, 1.59092756e-02, 8.32116151e-02,
-       9.97812339e-02, 6.73173251e-02, 1.22929880e-02, 8.37579916e-02,
-       5.01375506e-02, 4.59551301e-02, 9.51492157e-03, 4.00194706e-02,
-       1.09658511e-01, 7.74056452e-02, 1.37298241e-02, 1.05988533e-01,
-       1.60898809e-05, 1.10481677e-04, 0.00000000e+00, 1.94871760e-05,
-       1.20266257e-04, 2.78496180e-05, 6.19669223e-05, 1.37575728e-05,
-       3.63514741e-04, 1.14901322e-05, 3.99462599e-04, 1.01409347e-04,
-       6.62065094e-05, 1.55768846e-05, 1.53799654e-05, 0.00000000e+00,
+       5.42086526e-04, 9.51142388e-04, 3.35603299e-03, 2.54003977e-04,
+       0.00000000e+00, 1.02947121e-03, 8.64222880e-03, 1.74836135e-03,
+       2.41176049e-04, 1.66453705e-03, 9.76612887e-03, 1.08655313e-04,
+       1.72832414e-03, 3.25298128e-03, 2.57434278e-03, 2.48920259e-03])
+ffpe_sig_unrepaired = np.array([1.00757083e-03, 9.70659679e-05, 0.00000000e+00, 0.00000000e+00,
+       7.87043951e-04, 8.89171347e-05, 1.75779165e-06, 2.85211095e-04,
+       4.39676937e-04, 6.32074422e-05, 6.32459547e-07, 2.61895229e-05,
+       1.59487558e-04, 7.08155662e-05, 8.17655775e-07, 8.92998639e-06,
+       3.11454447e-04, 1.43816294e-05, 0.00000000e+00, 1.76805023e-05,
+       0.00000000e+00, 4.06375991e-06, 1.75779165e-06, 7.55986191e-04,
+       9.97155412e-05, 2.41113491e-04, 0.00000000e+00, 2.59707890e-06,
+       5.12416757e-06, 1.32294429e-05, 2.65605604e-05, 3.68038582e-06,
+       1.16021709e-01, 5.99717757e-02, 1.61508013e-02, 8.34836463e-02,
+       1.00006319e-01, 6.81329346e-02, 1.23108268e-02, 8.37213781e-02,
+       4.96857913e-02, 4.59272179e-02, 9.53685566e-03, 3.98532803e-02,
+       1.09257625e-01, 7.75709436e-02, 1.38246928e-02, 1.05331588e-01,
+       1.56423752e-05, 1.05046747e-04, 0.00000000e+00, 1.91915845e-05,
+       1.23156455e-04, 2.74271805e-05, 6.29898919e-05, 1.35488908e-05,
+       2.99979113e-04, 1.13158439e-05, 3.98202405e-04, 8.80843589e-05,
+       6.51776902e-05, 1.53234091e-05, 1.51466741e-05, 0.00000000e+00,
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
        0.00000000e+00, 0.00000000e+00, 0.00000000e+00, 0.00000000e+00,
-       2.83400972e-06, 9.28785921e-05, 2.94534404e-04, 0.00000000e+00,
-       0.00000000e+00, 1.76091839e-04, 6.99155009e-04, 3.41232970e-06,
-       1.14479092e-04, 3.66513015e-04, 7.80666100e-04, 0.00000000e+00,
-       4.37363908e-04, 3.16165982e-04, 1.14378427e-04, 3.05807570e-05])
+       2.76401719e-06, 7.12948795e-05, 2.70796241e-04, 0.00000000e+00,
+       0.00000000e+00, 1.26518469e-04, 7.88377269e-04, 0.00000000e+00,
+       1.15328586e-04, 3.13867028e-04, 8.33540020e-04, 0.00000000e+00,
+       5.02079162e-04, 2.24862364e-04, 1.38366609e-04, 2.99182632e-05])
 
 channels = np.array(['C>A@ACA', 'C>A@ACC', 'C>A@ACG', 'C>A@ACT', 'C>A@CCA', 'C>A@CCC',
                         'C>A@CCG', 'C>A@CCT', 'C>A@GCA', 'C>A@GCC', 'C>A@GCG', 'C>A@GCT',
@@ -189,6 +188,103 @@ def SBS96_plot(sig, label = "", name = "", file = False, norm = False,
         ax.text(0.505 * (left + right), 0.5 * (bottom + top), label, color = "black",size = s,
                 horizontalalignment='center',verticalalignment='center',
                 transform=ax.transAxes , rotation = 90)
+
+    ax.margins(x=0.002, y=0.002)
+    plt.tight_layout()
+    if file:
+        plt.savefig(file, bbox_inches = "tight", dpi = 300)
+    plt.show()
+
+def SBS96_plot_specified(sig, name = "", label = "", norm = "False", file = False, width = 10, height = 2, 
+                         bar_width = 0.5, grid = 0.4, s = 8, xticks = False):
+    channel = 96
+    col_set = ['deepskyblue','black','red','lightgrey','yellowgreen','pink']
+    col_list = []
+    for i in range (len(col_set)):
+        col_list += [col_set[i]] * 16
+    
+    sns.set(rc={"figure.figsize":(width, height)})
+    sns.set(style="whitegrid", color_codes=True, rc={"grid.linewidth": grid, 'grid.color': '.7', 'ytick.major.size': 2,
+                                                 'axes.edgecolor': '.3', 'axes.linewidth': 1.35,})
+
+    channel6 = ['C>A','C>G','C>T','T>A','T>C','T>G']
+    channel96 = ['ACA', 'ACC', 'ACG', 'ACT', 'CCA', 'CCC', 'CCG', 'CCT', 'GCA',
+               'GCC', 'GCG', 'GCT', 'TCA', 'TCC', 'TCG', 'TCT', 'ACA', 'ACC',
+               'ACG', 'ACT', 'CCA', 'CCC', 'CCG', 'CCT', 'GCA', 'GCC', 'GCG',
+               'GCT', 'TCA', 'TCC', 'TCG', 'TCT', 'ACA', 'ACC', 'ACG', 'ACT',
+               'CCA', 'CCC', 'CCG', 'CCT', 'GCA', 'GCC', 'GCG', 'GCT', 'TCA',
+               'TCC', 'TCG', 'TCT', 'ATA', 'ATC', 'ATG', 'ATT', 'CTA', 'CTC',
+               'CTG', 'CTT', 'GTA', 'GTC', 'GTG', 'GTT', 'TTA', 'TTC', 'TTG',
+               'TTT', 'ATA', 'ATC', 'ATG', 'ATT', 'CTA', 'CTC', 'CTG', 'CTT',
+               'GTA', 'GTC', 'GTG', 'GTT', 'TTA', 'TTC', 'TTG', 'TTT', 'ATA',
+               'ATC', 'ATG', 'ATT', 'CTA', 'CTC', 'CTG', 'CTT', 'GTA', 'GTC',
+               'GTG', 'GTT', 'TTA', 'TTC', 'TTG', 'TTT']
+    
+    ## plot the normalized version if asked:
+    if norm == "True":
+        normed_sig = sig / np.sum(sig)
+        plt.bar(range(channel), normed_sig , width = bar_width, color = col_list)
+        plt.xticks(rotation = 90, size = 7, weight='bold')
+        plt.ylim (0,np.max(normed_sig) * 1.15)
+        plt.annotate (name,(80, np.max(normed_sig) -0.015), size = 11)
+        plt.ylabel("Frequency")
+    ## plot the original version:
+    else:
+        plt.bar(range(channel), sig , width = bar_width, color =col_list)
+        plt.xticks(rotation=90, size = 7, weight='bold')
+        plt.ylim (0,np.max(sig)*1.15)
+        
+        if  np.round(np.sum (sig)) != 1:
+            plt.annotate ('Total Count : ' + format(np.sum(sig), ','), (0, np.max(sig)*0.75), size = 11)
+        plt.ylabel("Number of\nSBSs")
+        plt.annotate (name,(0, np.max(sig)))
+    if xticks:
+        plt.xticks(range(channel), channel96, rotation = 90, ha = "center", va= "center",  size = 7)
+    else:
+        plt.xticks([], [])
+        
+    plt.yticks( va= "center",  size = 9)
+    ## plot the bar annotation:
+    text_col = ["black","w","w","black","black","black"]
+    for i in range(6):
+        
+        left, width = 0 + 1/6 * i + 0.001, 1/6 - 0.002
+        
+        bottom, height = 1.003, 0.14
+        right = left + width
+        top = bottom + height
+        ax = plt.gca()
+        
+        p = plt.Rectangle((left, bottom), width, height, fill=True, color = col_set[i])
+        p.set_transform(ax.transAxes)
+            
+        p.set_clip_on(False)
+        ax.add_patch(p)
+        ax.text(0.5 * (left + right), 0.5 * (bottom + top), channel6[i], color = text_col[i], weight='bold',size = s,
+                horizontalalignment='center',verticalalignment='center', transform=ax.transAxes)
+
+        if channel6[i] == "T>C":
+            bottom, height = 0, 1
+            p = plt.Rectangle((left, bottom), width, height, fill=True, color = 'lightgrey', alpha = 0.2)
+            p.set_transform(ax.transAxes)
+            p.set_clip_on(False)
+            ax.add_patch(p)
+            ax.text(0.5 * (left + right), 0.1 * (bottom + top), 'Removed', color = 'black', size = 11,
+                horizontalalignment='center',verticalalignment='center', transform=ax.transAxes)
+            
+    ## plot the name annotation
+    if label != "":
+        left, width = 1.003, 0.05
+        bottom, height = 0, 1
+        right = left + width
+        top = bottom + height
+        ax = plt.gca()
+        p = plt.Rectangle((left, bottom), width, height, fill=True, color = "silver",alpha = 0.2)
+        p.set_transform(ax.transAxes)
+        p.set_clip_on(False)
+        ax.add_patch(p)
+        ax.text(0.502 * (left + right), 0.5 * (bottom + top), label, color = "black",size = 11,
+            horizontalalignment='center',verticalalignment='center',transform=ax.transAxes , rotation = 90)
 
     ax.margins(x=0.002, y=0.002)
     plt.tight_layout()
@@ -413,4 +509,101 @@ def plot_confusion_matrix(cf_matrix, f=None, target_names=None, title = None):
     plt.ylabel("True Label",fontsize = 11)
     if f:
         plt.savefig(f, bbox_inches = "tight", dpi = 300)
+    plt.show()
+    
+def SBS96_plot_specified(sig, name = "", label = "", norm = "False", file = False, width = 10, height = 2, 
+                         bar_width = 1, grid = 0.4, s = 8, xticks = False):
+    channel = 96
+    col_set = ['deepskyblue','black','red','lightgrey','yellowgreen','pink']
+    col_list = []
+    for i in range (len(col_set)):
+        col_list += [col_set[i]] * 16
+    
+    sns.set(rc={"figure.figsize":(width, height)})
+    sns.set(style="whitegrid", color_codes=True, rc={"grid.linewidth": grid, 'grid.color': '.7', 'ytick.major.size': 2,
+                                                 'axes.edgecolor': '.3', 'axes.linewidth': 1.35,})
+
+    channel6 = ['C>A','C>G','C>T','T>A','T>C','T>G']
+    channel96 = ['ACA', 'ACC', 'ACG', 'ACT', 'CCA', 'CCC', 'CCG', 'CCT', 'GCA',
+               'GCC', 'GCG', 'GCT', 'TCA', 'TCC', 'TCG', 'TCT', 'ACA', 'ACC',
+               'ACG', 'ACT', 'CCA', 'CCC', 'CCG', 'CCT', 'GCA', 'GCC', 'GCG',
+               'GCT', 'TCA', 'TCC', 'TCG', 'TCT', 'ACA', 'ACC', 'ACG', 'ACT',
+               'CCA', 'CCC', 'CCG', 'CCT', 'GCA', 'GCC', 'GCG', 'GCT', 'TCA',
+               'TCC', 'TCG', 'TCT', 'ATA', 'ATC', 'ATG', 'ATT', 'CTA', 'CTC',
+               'CTG', 'CTT', 'GTA', 'GTC', 'GTG', 'GTT', 'TTA', 'TTC', 'TTG',
+               'TTT', 'ATA', 'ATC', 'ATG', 'ATT', 'CTA', 'CTC', 'CTG', 'CTT',
+               'GTA', 'GTC', 'GTG', 'GTT', 'TTA', 'TTC', 'TTG', 'TTT', 'ATA',
+               'ATC', 'ATG', 'ATT', 'CTA', 'CTC', 'CTG', 'CTT', 'GTA', 'GTC',
+               'GTG', 'GTT', 'TTA', 'TTC', 'TTG', 'TTT']
+    
+    ## plot the normalized version if asked:
+    if norm == "True":
+        normed_sig = sig / np.sum(sig)
+        plt.bar(range(channel), normed_sig , width = bar_width, color = col_list)
+        plt.xticks(rotation = 90, size = 7, weight='bold')
+        plt.ylim (0,np.max(normed_sig) * 1.15)
+        plt.annotate (name,(80, np.max(normed_sig) -0.015), size = 11)
+        plt.ylabel("Frequency")
+    ## plot the original version:
+    else:
+        plt.bar(range(channel), sig , width = bar_width, color =col_list)
+        plt.xticks(rotation=90, size = 7, weight='bold')
+        plt.ylim (0,np.max(sig)*1.15)
+        
+        if  np.round(np.sum (sig)) != 1:
+            plt.annotate ('Total Count : ' + format(np.sum(sig), ','), (0, np.max(sig)*0.75), size = 11)
+        plt.ylabel("Number of\nSBSs")
+        plt.annotate (name,(0, np.max(sig)))
+    if xticks:
+        plt.xticks(range(channel), channel96, rotation = 90, ha = "center", va= "center",  size = 7)
+    else:
+        plt.xticks([], [])
+        
+    plt.yticks( va= "center",  size = 9)
+    ## plot the bar annotation:
+    text_col = ["black","w","w","black","black","black"]
+    for i in range(6):
+        
+        left, width = 0 + 1/6 * i + 0.001, 1/6 - 0.002
+        
+        bottom, height = 1.003, 0.14
+        right = left + width
+        top = bottom + height
+        ax = plt.gca()
+        
+        p = plt.Rectangle((left, bottom), width, height, fill=True, color = col_set[i])
+        p.set_transform(ax.transAxes)
+            
+        p.set_clip_on(False)
+        ax.add_patch(p)
+        ax.text(0.5 * (left + right), 0.5 * (bottom + top), channel6[i], color = text_col[i], weight='bold',size = s,
+                horizontalalignment='center',verticalalignment='center', transform=ax.transAxes)
+
+        if channel6[i] == "T>C":
+            bottom, height = 0, 1
+            p = plt.Rectangle((left, bottom), width, height, fill=True, color = 'lightgrey', alpha = 0.15)
+            p.set_transform(ax.transAxes)
+            p.set_clip_on(False)
+            ax.add_patch(p)
+            ax.text(0.5 * (left + right), 0.75 * (bottom + top), 'Removed', color = 'black', size = 10,
+                horizontalalignment='center',verticalalignment='center', transform=ax.transAxes)
+            
+    ## plot the name annotation
+    if label != "":
+        left, width = 1.003, 0.05
+        bottom, height = 0, 1
+        right = left + width
+        top = bottom + height
+        ax = plt.gca()
+        p = plt.Rectangle((left, bottom), width, height, fill=True, color = "silver",alpha = 0.15)
+        p.set_transform(ax.transAxes)
+        p.set_clip_on(False)
+        ax.add_patch(p)
+        ax.text(0.502 * (left + right), 0.5 * (bottom + top), label, color = "black",size = 11,
+            horizontalalignment='center',verticalalignment='center',transform=ax.transAxes , rotation = 90)
+
+    ax.margins(x=0.002, y=0.002)
+    plt.tight_layout()
+    if file:
+        plt.savefig(file, bbox_inches = "tight", dpi = 300)
     plt.show()
