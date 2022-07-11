@@ -320,7 +320,7 @@ Note:
     # Keep all but the first
     argument_list = full_cmd_arguments[1:]
     
-    short_options = "hi:s:l:o:t:p:"
+    short_options = "h:i:s:l:o:t:p:"
     long_options = ["help", "input=", "sample=", "label=","output_dir=", "iteration= ", "precision="]
     
     try:
