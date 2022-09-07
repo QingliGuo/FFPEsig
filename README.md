@@ -36,5 +36,4 @@ Here we include analysis codes and data used in our manuscript entitled "The mut
 + [Comparing refitted attributions of 96c and 80c sig](https://qingliguo.github.io/FFPEsig/Comparing_refitting_results_of_96c_80c_sig.html)
 
 # Citation
-
-Our preprint is avaiable in bioRxiv. [Check it out](https://www.biorxiv.org/content/10.1101/2021.03.11.434918v1). 
+Guo, Q., Lakatos, E., Bakir, I.A. et al. The mutational signatures of formalin fixation on the human genome. Nat Commun 13, 4487 (2022). https://doi.org/10.1038/s41467-022-32041-5
