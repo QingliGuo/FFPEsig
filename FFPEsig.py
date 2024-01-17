@@ -282,7 +282,7 @@ def SBS96_plot(sig, label = "", name = "", file = False, norm = False,
     ax.margins(x=0.002, y=0.002)
     plt.tight_layout()
     if file:
-        plt.savefig(file, bbox_inches = "tight", dpi = 300)
+        plt.savefig(file, bbox_inches = "tight", dpi = 300); f,ax = plt.subplots()
 
 def main():
     today = date.today()
